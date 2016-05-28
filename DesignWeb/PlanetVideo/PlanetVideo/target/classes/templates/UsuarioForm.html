@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="src/main/webapp/resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="src/main/webapp/resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="src/main/webapp/resources/css/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+  
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">PlanetVideo</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Usuarios</a></li>
+      <li><a href="#">Peliiculas</a></li> 
+      <li><a href="#">Page 3</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+ <div align="center">
+        <h1>New/Edit Contact</h1>
+       <form action="#" th:action="@{saveUsuario}" th:object="${usuario}" method="post">
+		<table>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" th:field="*{username}" /></td>
+				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Title error message</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="text" th:field="*{password}" /></td>
+				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Content error message</td>
+			</tr>
+			<tr>
+				<td>Admin:</td>
+				<td><input type="text" th:field="*{admin}" /></td>
+				<td th:if="${#fields.hasErrors('admin')}" th:errors="*{admin}">Content error message</td>
+			</tr>
+			
+			<tr>
+				<td><button type="submit">Submit post</button></td>
+			</tr>
+		</table>
+	</form>
+    </div>
+
+</body>
+</html>
