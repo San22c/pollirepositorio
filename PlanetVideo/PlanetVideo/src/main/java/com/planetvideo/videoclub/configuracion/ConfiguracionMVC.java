@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.planetvideo.videoclub.dao.PeliculaDao;
+import com.planetvideo.videoclub.dao.PeliculaDaoImpl;
 import com.planetvideo.videoclub.dao.UserDaoImpl;
 import com.planetvideo.videoclub.dao.UsuarioDao;
  
@@ -48,4 +50,12 @@ public class ConfiguracionMVC extends WebMvcConfigurerAdapter{
     public UsuarioDao getUsuarioDAO() {
         return new UserDaoImpl(getDataSource());
     }
+    
+    @Bean
+    public PeliculaDao getPeliculaDAO() {
+        return new PeliculaDaoImpl(getDataSource());
+    }
+    
+    
+    
 }

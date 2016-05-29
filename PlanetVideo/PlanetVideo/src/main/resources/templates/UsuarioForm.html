@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="src/main/webapp/resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="src/main/webapp/resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="src/main/webapp/resources/css/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body> 
+<div class="container">
+  <h2>Nuevo Usuario</h2>
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Datos Usuario</div>
+      <div class="panel-body">  <form action="#" th:action="@{saveUsuario}" th:object="${usuario}" method="post">
+		<table>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" th:field="*{username}" size="20" maxlength="10" placeholder="Ingrese username" /></td>
+				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Title error message</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" th:field="*{password}" size="20" maxlength="10" placeholder="Ingrese contraseña" /></td>
+				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Content error message</td>
+			</tr>
+			<tr>
+				<td>Permiso:</td>
+				<td><input type="radio" value='S' th:field="*{admin}" />Administrador</td> 
+				 <td><input type="radio" value='N' th:field="*{admin}" />Usuario</td>
+				<td th:if="${#fields.hasErrors('admin')}" th:errors="*{admin}">Content error message</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" th:field="*{email}" size="20" maxlength="10" placeholder="Ingrese email" /></td>
+				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Title error message</td>
+			</tr>
+			<tr>
+				<td><button type="submit" class="btn btn-success">Guardar</button></td>
+				<td><button type="reset" class="btn btn-danger">Reset</button></td> 
+				 
+				<td> <a href="/homeUsuarios" class="btn btn-info" role="button">Volver</a></td>
+			</tr>
+		</table>
+	</form></div>
+    </div>
+ 
+  </div>
+</div>
+
+ 
+
+</body>
+</html>

@@ -8,42 +8,59 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int idusuario;
+	
 	
 	@NotNull
-	 
+	@Size(min=4, max= 6)
 	private String username;
-	 @NotNull
-	 
+	
+	
+	@NotNull
+	@Size(min=4, max= 50)
+	private String email;
+	
+
+	
+	@NotNull
+	@Size(min=4, max= 6)
 	private String password;
+	
+	
+	@NotNull
+	@Size(min=1, max= 1)
+	private String admin;
 	public Usuario() {}
 	
-	public Usuario(int id) {
-		 this.id = id;
+	public Usuario(int idusuario) {
+		 this.idusuario = idusuario;
 	}
 	
-	public Usuario(String username, String password) {
+	public Usuario(String username, String password, String admin) {
 		 
 		this.username = username;
 		this.password = password;
+		this.admin = admin;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	 public String getAdmin() {
+			return admin;
+		}
+
+		public void setAdmin(String admin) {
+			this.admin = admin;
+		}
+	 
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -54,6 +71,23 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+		 
+	}
+
+	public int getIdusuario() {
+		return idusuario;
+	}
+
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

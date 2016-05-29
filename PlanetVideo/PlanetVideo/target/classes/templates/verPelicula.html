@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="src/main/webapp/resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="src/main/webapp/resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="src/main/webapp/resources/css/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body> 
+<div class="container">
+  <h2>Pelicula</h2>
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Datos Pelicula</div>
+      <div class="panel-body">  
+ 		<table>
+			<tr>
+				<td>Nombre de la película:</td>
+				 <td><div th:text="${pelicula.Title}"></div></td>
+			</tr>
+			<tr>
+				<td>URL(vídeo):</td>
+				  <td><div th:text="${pelicula.url}"></div></td>
+			</tr>
+			<tr>
+				<td>Descripción:</td>
+				<td><div th:text="${pelicula.Plot}"></div></td>
+			</tr>
+			<tr>
+				<td>Año:</td>
+				 <td><div th:text="${pelicula.Year}"></div></td>
+			</tr>
+			<tr>
+				<td>Director:</td>
+				 <td><div th:text="${pelicula.Director}"></div></td>
+			</tr>
+				<tr>
+				<td>Reparto de actores:</td>
+				 <td><div th:text="${pelicula.Actors}"></div></td>
+			</tr>
+			<tr>
+				<td>URL portada:</td>
+				 <td><div th:text="${pelicula.Poster}"></div></td>
+			</tr>
+				<tr>
+				<td>Valoración:</td>
+				 <td><div th:text="${pelicula.imdbRating}"></div></td>
+			</tr>
+			<tr>
+			 
+				<td> <a href="/homePeliculas" class="btn btn-info" role="button">Volver</a></td>
+			</tr>
+		</table>
+	 </div>
+    </div>
+</div>
+</div>
+ 
+</body>
+</html>

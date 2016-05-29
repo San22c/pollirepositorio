@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="src/main/webapp/resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="src/main/webapp/resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="src/main/webapp/resources/css/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body> 
+<div class="container">
+  <h2>Nuevo Usuario</h2>
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Datos Usuario</div>
+      <div class="panel-body">  <form action="#" th:action="@{savePelicula}" th:object="${usuario}" method="post">
+		<table>
+			<tr>
+				<td>Titulo:</td>
+				<td><input type="text" th:field="*{title}" size="60"   placeholder="Ingrese titulo" /></td>
+				<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error message</td>
+			</tr>
+			<tr>
+				<td>URL:</td>
+				<td><input type="text" th:field="*{url}" size="20"   placeholder="Ingrese URL" /></td>
+				<td th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Content error message</td>
+			</tr>
+			<tr>
+				<td>Descripcion:</td>
+				<td>
+				<textarea class="form-control" rows="3" id="comment" th:field="*{Plot}" placeholder="Ingrese Descripcion" ></textarea>
+				 </td>
+				 				<td th:if="${#fields.hasErrors('Plot')}" th:errors="*{Plot}">Content error message</td>
+				</tr>
+			
+			
+			<tr>
+				<td>Año:</td>
+				<td><input type="text" th:field="*{year}" size="20" maxlength="4" placeholder="Ingrese año" /></td>
+				<td th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Title error message</td>
+			</tr>
+			<tr>
+				<td>Director:</td>
+				<td><input type="text" th:field="*{Director}" size="40"  placeholder="Ingrese Director" /></td>
+				<td th:if="${#fields.hasErrors('Director')}" th:errors="*{Director}">Content error message</td>
+			</tr>
+			<tr>
+				<td>Reparto:</td>
+					<td><input type="text" th:field="*{Actors}" size="2000"   placeholder="Ingrese Actores" /></td>
+				<td th:if="${#fields.hasErrors('Actors')}" th:errors="*{Actors}">Content error message</td>
+		
+				 	</tr>
+			
+			<tr>
+				<td>URL portada:</td>
+				<td><input type="text" th:field="*{Poster}" size="20" maxlength="10" placeholder="Ingrese Poster" /></td>
+				<td th:if="${#fields.hasErrors('Poster')}" th:errors="*{Poster}">Title error message</td>
+			</tr>
+			<tr>
+				<td>Valoracion:</td>
+				<td><input type="text" th:field="*{imdbRating}" size="20" maxlength="100" placeholder="Ingrese valoracion" /></td>
+				<td th:if="${#fields.hasErrors('imdbRating')}" th:errors="*{imdbRating}">Content error message</td>
+			</tr>
+			 
+			
+			
+			<tr>
+				<td><button type="submit" class="btn btn-success">Guardar</button></td>
+				 
+				 
+				<td> <a href="/homePeliculas" class="btn btn-info" role="button">Volver</a></td>
+			</tr>
+		</table>
+	</form></div>
+    </div>
+ 
+  </div>
+</div>
+
+ 
+
+</body>
+</html>

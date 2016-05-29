@@ -21,41 +21,50 @@ public class UserDaoImpl implements UsuarioDao {
     }
  
 	@Override
-	public void saveOrUpdate(Usuario usuario) {
+	public void save (Usuario usuario) {
 		// TODO Auto-generated method stub
-		 if (usuario.getId() > 0) {
-		        // update
-		        String sql = "UPDATE usuario SET name=?, email=?, address=?, "
-		                    + "telephone=? WHERE usuario_id=?";
-		        jdbcTemplate.update(sql, usuario.getUsername(), usuario.getPassword(), usuario.getId());
-		    } else {
+		 if (usuario.getIdusuario()<= 0) {
+		       
 		        // insert
-		        String sql = "INSERT INTO usuario (name, email, address, telephone)"
+		        String sql = "INSERT INTO usuario (username, password, admin, email)"
 		                    + " VALUES (?, ?, ?, ?)";
-		        jdbcTemplate.update(sql, usuario.getUsername(), usuario.getPassword());
+		        jdbcTemplate.update(sql,usuario.getUsername(), usuario.getPassword(), usuario.getAdmin(), usuario.getEmail());
 		    }
 	}
+	
+	public void edit (Usuario usuario) {
+		// TODO Auto-generated method stub
+		int update=0;
+		 if (usuario.getUsername() != null) {
+		        // update
+		        String sql = "UPDATE usuario SET username=?, password=?, admin=?, email=? "
+		                    + " WHERE username=?";
+		      update =  jdbcTemplate.update(sql, usuario.getUsername(), usuario.getPassword(),usuario.getAdmin(),usuario.getEmail(),usuario.getUsername());
+		        System.out.println(sql);
+		    } }
 
 	@Override
-	public void delete(int usuarioid) {
+	public void delete(String username) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM usuario WHERE usuario_id=?";
-	    jdbcTemplate.update(sql, usuarioid);
+		String sql = "DELETE FROM usuario WHERE username=?";
+	    jdbcTemplate.update(sql, username);
 	}
 
 	@Override
-	public Usuario get(int usuarioid) {
+	public Usuario get(String username) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM usuario WHERE usuario_id=" + usuarioid;
+		String sql = "SELECT * FROM usuario WHERE username='" + username+"'";
 	    return jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>() {
 	        @Override
 	        public Usuario extractData(ResultSet rs) throws SQLException,
 	                DataAccessException {
 	            if (rs.next()) {
 	                Usuario usuario = new Usuario();
-	                usuario.setId(rs.getInt("usuario_id"));
+	                usuario.setIdusuario(rs.getInt("idusuario"));
 	                usuario.setUsername(rs.getString("username"));
 	                usuario.setPassword(rs.getString("password"));
+	                usuario.setAdmin(rs.getString("admin"));
+	                usuario.setEmail(rs.getString("email"));
 	                return usuario;
 	            }
 	 
@@ -66,25 +75,48 @@ public class UserDaoImpl implements UsuarioDao {
 	}
 
 	@Override
-	public List<Usuario> list() {
-		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM usuario";
-	    List<Usuario> listusuario = jdbcTemplate.query(sql, new RowMapper<Usuario>() {
-	 
-	        @Override
-	        public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
-	            Usuario ausuario = new Usuario();
-	 
-	            ausuario.setId(rs.getInt("usuario_id"));
-	            ausuario.setUsername(rs.getString("username"));
-	            ausuario.setPassword(rs.getString("password"));
-	           
-	            return ausuario;
-	        }
-	 
-	    });
-	 
-	    return listusuario;
+	public List<Usuario> list() { 
+		    return this.jdbcTemplate.query( "select username, password, admin, email from usuario", new UsuarioMapper());
+		}
+
+		private static final class UsuarioMapper implements RowMapper<Usuario> {
+
+		    public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+		        Usuario usuario = new Usuario();
+		        usuario.setUsername(rs.getString("username"));
+		        usuario.setPassword(rs.getString("password"));
+		        usuario.setAdmin(rs.getString("admin"));
+		        usuario.setEmail(rs.getString("email"));
+		        return usuario;
+		    }
+		}
+
+		@Override
+		public boolean login(String username, String password) {
+			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
+			int contador=0; 
+			 contador = jdbcTemplate.queryForObject("SELECT Count(*) FROM usuario WHERE username='" + username+"'" + " and password='" + password+"'", int.class);
+			 if (contador == 1){
+				 return true;
+			 } else{return false;}
+			 
+ 		}
+
+		@Override
+		public boolean esAdmin(String username) {
+			// TODO Auto-generated method stub
+			String admin;
+			char c;
+			admin = jdbcTemplate.queryForObject("select admin from usuario where username = '"+ username+"'", String.class);
+			 c= admin.charAt(0);
+			if(c == 'S') {return true;}
+			else{return false;}
+			 
+		}
+
+		 
+		 
 	}
 
-}
+
